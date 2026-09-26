@@ -156,7 +156,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReplaceActionPerformed
 
     private void chbCaseSensivityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbCaseSensivityActionPerformed
-        toggleCaseSensivity();
+
     }//GEN-LAST:event_chbCaseSensivityActionPerformed
 
     /**
@@ -201,14 +201,10 @@ public class MainWindow extends javax.swing.JFrame {
  private void search() {
         String searchInputValue = searchInputField.getText();
 
-        textEditorModel.find(searchInputValue);
+        textEditorModel.find(searchInputValue, chbCaseSensivity.isSelected());
         responseTextField.append("\n" + textEditorModel.getMessage() + "\n");
         textEditorModel.requestFocusInWindow();
     }
- 
- private void toggleCaseSensivity() {
-     chbCaseSensivity.isSelected();         
- }
  
 private void replace() {}
 }

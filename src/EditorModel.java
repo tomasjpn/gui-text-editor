@@ -12,9 +12,15 @@ public class EditorModel extends JTextArea {
 	    	return findPosition;
 	}
 
-	public boolean find(String searchInputValue) {
+	public boolean find(String searchInputValue, boolean ignoreCase) {
     	String textEditorContent = this.getText();
     	int startPosition = this.getCaretPosition();
+        
+        if(ignoreCase) {
+            textEditorContent = textEditorContent .toLowerCase();
+            searchInputValue = searchInputValue.toLowerCase();
+            
+        }
             
     	findPosition = textEditorContent.indexOf(searchInputValue, startPosition);
 
