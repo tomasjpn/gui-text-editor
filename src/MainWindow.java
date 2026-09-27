@@ -1,10 +1,12 @@
+
 /**
  *
  * @author Tomas P
  */
 public class MainWindow extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainWindow.class.getName());
+
     public MainWindow() {
         initComponents();
         this.setLocation(70, 70);
@@ -198,13 +200,14 @@ public class MainWindow extends javax.swing.JFrame {
     private EditorModel textEditorModel;
     // End of variables declaration//GEN-END:variables
 
- private void search() {
+    private void search() {
         String searchInputValue = searchInputField.getText();
 
         textEditorModel.find(searchInputValue, chbCaseSensivity.isSelected());
         responseTextField.append("\n" + textEditorModel.getMessage() + "\n");
         textEditorModel.requestFocusInWindow();
     }
- 
-private void replace() {}
+
+    private void replace() {
+    }
 }
