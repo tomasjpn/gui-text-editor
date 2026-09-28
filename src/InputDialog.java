@@ -15,7 +15,22 @@ public class InputDialog extends JTextArea {
                 null,
                 null
         );
+    }
 
+    public int showInfoMessage() {
+        return JOptionPane.showOptionDialog(
+                this,
+                "<html>"
+                + "<b><h1>Tomas Pham</h1></b>"
+                + "<p>ITO8<br>28.09.2026</p>"
+                + "</html>",
+                "Info",
+                JOptionPane.YES_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                null,
+                null
+        );
     }
 
 }

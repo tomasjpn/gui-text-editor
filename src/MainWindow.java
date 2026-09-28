@@ -33,6 +33,15 @@ public class MainWindow extends javax.swing.JFrame {
         btnReplace = new javax.swing.JButton();
         btnReplaceAll = new javax.swing.JButton();
         chbCaseSensivity = new javax.swing.JCheckBox();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        menuHelp = new javax.swing.JMenu();
+        menuHelpInfo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,6 +95,48 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        jMenu1.setText("Datei");
+
+        jMenuItem1.setText("Öffnen");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+        jMenu1.add(jSeparator1);
+
+        jMenuItem2.setText("Beenden");
+        jMenu1.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Bearbeiten");
+
+        jMenuItem4.setText("Suchen");
+        jMenu2.add(jMenuItem4);
+
+        jMenuBar1.add(jMenu2);
+
+        menuHelp.setText("Hilfe");
+        menuHelp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuHelpActionPerformed(evt);
+            }
+        });
+
+        menuHelpInfo.setText("Info");
+        menuHelpInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuHelpInfoActionPerformed(evt);
+            }
+        });
+        menuHelp.add(menuHelpInfo);
+
+        jMenuBar1.add(menuHelp);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -133,7 +184,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -160,6 +211,20 @@ public class MainWindow extends javax.swing.JFrame {
     private void chbCaseSensivityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbCaseSensivityActionPerformed
 
     }//GEN-LAST:event_chbCaseSensivityActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void menuHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuHelpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuHelpActionPerformed
+
+    private void menuHelpInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuHelpInfoActionPerformed
+        // TODO add your handling code here:
+        InputDialog InputDialog = new InputDialog();
+        InputDialog.showInfoMessage();
+    }//GEN-LAST:event_menuHelpInfoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,9 +257,18 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton btnSearch;
     private javax.swing.JCheckBox chbCaseSensivity;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JMenu menuHelp;
+    private javax.swing.JMenuItem menuHelpInfo;
     private javax.swing.JTextArea responseTextField;
     private javax.swing.JTextField searchInputField;
     private EditorModel textEditorModel;
