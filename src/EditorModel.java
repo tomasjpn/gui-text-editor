@@ -27,7 +27,7 @@ public class EditorModel extends JTextArea {
 
         findPosition = textEditorContent.indexOf(searchInputValue, startPosition);
 
-        if (findPosition < 0 && InputDialog.questionMessage() == javax.swing.JOptionPane.YES_OPTION) {
+        if (findPosition < 0 && InputDialog.showQuestionMessage() == javax.swing.JOptionPane.YES_OPTION) {
             findPosition = textEditorContent.indexOf(searchInputValue, 0);
         }
 
