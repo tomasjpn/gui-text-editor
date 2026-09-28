@@ -39,7 +39,7 @@ public class MainWindow extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        menuSearch = new javax.swing.JMenuItem();
         menuHelp = new javax.swing.JMenu();
         menuHelpInfo = new javax.swing.JMenuItem();
 
@@ -113,17 +113,18 @@ public class MainWindow extends javax.swing.JFrame {
 
         jMenu2.setText("Bearbeiten");
 
-        jMenuItem4.setText("Suchen");
-        jMenu2.add(jMenuItem4);
+        menuSearch.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        menuSearch.setText("Suchen");
+        menuSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSearchActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuSearch);
 
         jMenuBar1.add(jMenu2);
 
         menuHelp.setText("Hilfe");
-        menuHelp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuHelpActionPerformed(evt);
-            }
-        });
 
         menuHelpInfo.setText("Info");
         menuHelpInfo.addActionListener(new java.awt.event.ActionListener() {
@@ -216,15 +217,16 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void menuHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuHelpActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menuHelpActionPerformed
-
     private void menuHelpInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuHelpInfoActionPerformed
         // TODO add your handling code here:
         InputDialog InputDialog = new InputDialog();
         InputDialog.showInfoMessage();
     }//GEN-LAST:event_menuHelpInfoActionPerformed
+
+    private void menuSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSearchActionPerformed
+        // TODO add your handling code here:
+        search();
+    }//GEN-LAST:event_menuSearchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -262,13 +264,13 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JMenu menuHelp;
     private javax.swing.JMenuItem menuHelpInfo;
+    private javax.swing.JMenuItem menuSearch;
     private javax.swing.JTextArea responseTextField;
     private javax.swing.JTextField searchInputField;
     private EditorModel textEditorModel;
