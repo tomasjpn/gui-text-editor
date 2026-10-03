@@ -34,12 +34,12 @@ public class MainWindow extends javax.swing.JFrame {
         btnReplaceAll = new javax.swing.JButton();
         chbCaseSensivity = new javax.swing.JCheckBox();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        menuFile = new javax.swing.JMenu();
+        menuFileOpen = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        menuSearch = new javax.swing.JMenuItem();
+        menuFileEnd = new javax.swing.JMenuItem();
+        menuEdit = new javax.swing.JMenu();
+        menuEditSearch = new javax.swing.JMenuItem();
         menuHelp = new javax.swing.JMenu();
         menuHelpInfo = new javax.swing.JMenuItem();
 
@@ -95,34 +95,39 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        jMenu1.setText("Datei");
+        menuFile.setText("Datei");
 
-        jMenuItem1.setText("Öffnen");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menuFileOpen.setText("Öffnen");
+        menuFileOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                menuFileOpenActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
-        jMenu1.add(jSeparator1);
+        menuFile.add(menuFileOpen);
+        menuFile.add(jSeparator1);
 
-        jMenuItem2.setText("Beenden");
-        jMenu1.add(jMenuItem2);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Bearbeiten");
-
-        menuSearch.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        menuSearch.setText("Suchen");
-        menuSearch.addActionListener(new java.awt.event.ActionListener() {
+        menuFileEnd.setText("Beenden");
+        menuFileEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuSearchActionPerformed(evt);
+                menuFileEndActionPerformed(evt);
             }
         });
-        jMenu2.add(menuSearch);
+        menuFile.add(menuFileEnd);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(menuFile);
+
+        menuEdit.setText("Bearbeiten");
+
+        menuEditSearch.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        menuEditSearch.setText("Suchen");
+        menuEditSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuEditSearchActionPerformed(evt);
+            }
+        });
+        menuEdit.add(menuEditSearch);
+
+        jMenuBar1.add(menuEdit);
 
         menuHelp.setText("Hilfe");
 
@@ -213,9 +218,9 @@ public class MainWindow extends javax.swing.JFrame {
 
     }//GEN-LAST:event_chbCaseSensivityActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void menuFileOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFileOpenActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_menuFileOpenActionPerformed
 
     private void menuHelpInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuHelpInfoActionPerformed
         // TODO add your handling code here:
@@ -223,10 +228,15 @@ public class MainWindow extends javax.swing.JFrame {
         InputDialog.showInfoMessage();
     }//GEN-LAST:event_menuHelpInfoActionPerformed
 
-    private void menuSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSearchActionPerformed
+    private void menuEditSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditSearchActionPerformed
         // TODO add your handling code here:
         search();
-    }//GEN-LAST:event_menuSearchActionPerformed
+    }//GEN-LAST:event_menuEditSearchActionPerformed
+
+    private void menuFileEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFileEndActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_menuFileEndActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,18 +269,18 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton btnSearch;
     private javax.swing.JCheckBox chbCaseSensivity;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JMenu menuEdit;
+    private javax.swing.JMenuItem menuEditSearch;
+    private javax.swing.JMenu menuFile;
+    private javax.swing.JMenuItem menuFileEnd;
+    private javax.swing.JMenuItem menuFileOpen;
     private javax.swing.JMenu menuHelp;
     private javax.swing.JMenuItem menuHelpInfo;
-    private javax.swing.JMenuItem menuSearch;
     private javax.swing.JTextArea responseTextField;
     private javax.swing.JTextField searchInputField;
     private EditorModel textEditorModel;
