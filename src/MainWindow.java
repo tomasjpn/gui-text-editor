@@ -106,6 +106,7 @@ public class MainWindow extends javax.swing.JFrame {
         menuFile.add(menuFileOpen);
         menuFile.add(jSeparator1);
 
+        menuFileEnd.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.ALT_DOWN_MASK));
         menuFileEnd.setText("Beenden");
         menuFileEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,6 +221,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void menuFileOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFileOpenActionPerformed
         // TODO add your handling code here:
+        openFileDialog();
     }//GEN-LAST:event_menuFileOpenActionPerformed
 
     private void menuHelpInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuHelpInfoActionPerformed
@@ -292,6 +294,10 @@ public class MainWindow extends javax.swing.JFrame {
         textEditorModel.find(searchInputValue, chbCaseSensivity.isSelected());
         responseTextField.append("\n" + textEditorModel.getMessage() + "\n");
         textEditorModel.requestFocusInWindow();
+    }
+
+    private void openFileDialog() {
+        FileChooser.chooseImage(this);
     }
 
     private void replace() {
