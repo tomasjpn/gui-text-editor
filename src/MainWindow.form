@@ -94,10 +94,6 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane2" min="-2" pref="440" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
@@ -117,6 +113,13 @@
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane2" min="-2" pref="440" max="-2" attributes="0"/>
+                          <Component id="positionPanel" alignment="0" min="-2" pref="440" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -142,10 +145,12 @@
                   </Group>
                   <Component id="jScrollPane1" min="-2" pref="272" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane2" pref="98" max="32767" attributes="0"/>
+              <Component id="jScrollPane2" min="-2" pref="104" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="positionPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -165,6 +170,9 @@
             <Property name="rows" type="int" value="5"/>
             <Property name="text" type="java.lang.String" value="Hier steht mehrzeiliger Text.&#xa;Durch den Button &quot;Suchen&quot; kann man sich den Suchtext&#xa;aus dem Feld &quot;tfSuchen&quot; im Editorfeld finden lassen.&#xa;&#xa;Der &quot;Suchtext&quot; soll dann markiert werden.&#xa;&#xa;Ein Text wie &quot;SuChTeXt&quot; l&#xe4;sst sich nur finden,&#xa;wenn &quot;Gro&#xdf;schreibung ignorieren&quot; ausgew&#xe4;hlt ist."/>
           </Properties>
+          <Events>
+            <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="textEditorModelCaretUpdate"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -233,5 +241,65 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chbCaseSensivityActionPerformed"/>
       </Events>
     </Component>
+    <Container class="javax.swing.JPanel" name="positionPanel">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+        <Property name="alignment" type="int" value="0"/>
+        <Property name="verticalGap" type="int" value="0"/>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="labelLine">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Zeile:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="lineInputField">
+          <Properties>
+            <Property name="columns" type="int" value="4"/>
+            <Property name="toolTipText" type="java.lang.String" value="Zeilennummer (ab 1)"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lineInputFieldActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(java.text.NumberFormat.getIntegerInstance())"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="labelColumn">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Spalte:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="columnInputField">
+          <Properties>
+            <Property name="columns" type="int" value="4"/>
+            <Property name="toolTipText" type="java.lang.String" value="Spaltennummer (ab 1)"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="columnInputFieldActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(java.text.NumberFormat.getIntegerInstance())"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="labelCharacter">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Zeichen:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="characterInputField">
+          <Properties>
+            <Property name="columns" type="int" value="6"/>
+            <Property name="toolTipText" type="java.lang.String" value="Absolute Zeichenposition (ab 0)"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="characterInputFieldActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(java.text.NumberFormat.getIntegerInstance())"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>

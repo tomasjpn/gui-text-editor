@@ -11,6 +11,7 @@ public class MainWindow extends javax.swing.JFrame {
         initComponents();
         this.setLocation(70, 70);
         textEditorModel.setCaretPosition(0);
+        textEditorModelCaretUpdate(null);
     }
 
     /**
@@ -33,6 +34,13 @@ public class MainWindow extends javax.swing.JFrame {
         btnReplace = new javax.swing.JButton();
         btnReplaceAll = new javax.swing.JButton();
         chbCaseSensivity = new javax.swing.JCheckBox();
+        positionPanel = new javax.swing.JPanel();
+        labelLine = new javax.swing.JLabel();
+        lineInputField = new javax.swing.JFormattedTextField(java.text.NumberFormat.getIntegerInstance());
+        labelColumn = new javax.swing.JLabel();
+        columnInputField = new javax.swing.JFormattedTextField(java.text.NumberFormat.getIntegerInstance());
+        labelCharacter = new javax.swing.JLabel();
+        characterInputField = new javax.swing.JFormattedTextField(java.text.NumberFormat.getIntegerInstance());
         jMenuBar1 = new javax.swing.JMenuBar();
         menuFile = new javax.swing.JMenu();
         menuFileOpen = new javax.swing.JMenuItem();
@@ -48,6 +56,11 @@ public class MainWindow extends javax.swing.JFrame {
         textEditorModel.setColumns(20);
         textEditorModel.setRows(5);
         textEditorModel.setText("Hier steht mehrzeiliger Text.\nDurch den Button \"Suchen\" kann man sich den Suchtext\naus dem Feld \"tfSuchen\" im Editorfeld finden lassen.\n\nDer \"Suchtext\" soll dann markiert werden.\n\nEin Text wie \"SuChTeXt\" lässt sich nur finden,\nwenn \"Großschreibung ignorieren\" ausgewählt ist.");
+        textEditorModel.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                textEditorModelCaretUpdate(evt);
+            }
+        });
         jScrollPane1.setViewportView(textEditorModel);
 
         responseTextField.setEditable(false);
@@ -94,6 +107,44 @@ public class MainWindow extends javax.swing.JFrame {
                 chbCaseSensivityActionPerformed(evt);
             }
         });
+
+        positionPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 0));
+
+        labelLine.setText("Zeile:");
+        positionPanel.add(labelLine);
+
+        lineInputField.setColumns(4);
+        lineInputField.setToolTipText("Zeilennummer (ab 1)");
+        lineInputField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lineInputFieldActionPerformed(evt);
+            }
+        });
+        positionPanel.add(lineInputField);
+
+        labelColumn.setText("Spalte:");
+        positionPanel.add(labelColumn);
+
+        columnInputField.setColumns(4);
+        columnInputField.setToolTipText("Spaltennummer (ab 1)");
+        columnInputField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                columnInputFieldActionPerformed(evt);
+            }
+        });
+        positionPanel.add(columnInputField);
+
+        labelCharacter.setText("Zeichen:");
+        positionPanel.add(labelCharacter);
+
+        characterInputField.setColumns(6);
+        characterInputField.setToolTipText("Absolute Zeichenposition (ab 0)");
+        characterInputField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                characterInputFieldActionPerformed(evt);
+            }
+        });
+        positionPanel.add(characterInputField);
 
         menuFile.setText("Datei");
 
@@ -152,9 +203,6 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -168,7 +216,12 @@ public class MainWindow extends javax.swing.JFrame {
                                     .addComponent(btnReplaceAll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(chbCaseSensivity)))
                             .addComponent(jLabel1))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(positionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,10 +241,12 @@ public class MainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnReplaceAll))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(positionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -240,6 +295,25 @@ public class MainWindow extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_menuFileEndActionPerformed
 
+    private void textEditorModelCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_textEditorModelCaretUpdate
+        textEditorModel.updatePositionFields(lineInputField, columnInputField, characterInputField);
+    }//GEN-LAST:event_textEditorModelCaretUpdate
+
+    private void characterInputFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_characterInputFieldActionPerformed
+        textEditorModel.setCharacterPosition(characterInputField);
+        finishPositionInput();
+    }//GEN-LAST:event_characterInputFieldActionPerformed
+
+    private void lineInputFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lineInputFieldActionPerformed
+        textEditorModel.setLineNumber(lineInputField);
+        finishPositionInput();
+    }//GEN-LAST:event_lineInputFieldActionPerformed
+
+    private void columnInputFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_columnInputFieldActionPerformed
+        textEditorModel.setColumnNumber(columnInputField);
+        finishPositionInput();
+    }//GEN-LAST:event_columnInputFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -269,13 +343,19 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton btnReplace;
     private javax.swing.JButton btnReplaceAll;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JFormattedTextField characterInputField;
     private javax.swing.JCheckBox chbCaseSensivity;
+    private javax.swing.JFormattedTextField columnInputField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel labelCharacter;
+    private javax.swing.JLabel labelColumn;
+    private javax.swing.JLabel labelLine;
+    private javax.swing.JFormattedTextField lineInputField;
     private javax.swing.JMenu menuEdit;
     private javax.swing.JMenuItem menuEditSearch;
     private javax.swing.JMenu menuFile;
@@ -283,6 +363,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuFileOpen;
     private javax.swing.JMenu menuHelp;
     private javax.swing.JMenuItem menuHelpInfo;
+    private javax.swing.JPanel positionPanel;
     private javax.swing.JTextArea responseTextField;
     private javax.swing.JTextField searchInputField;
     private EditorModel textEditorModel;
@@ -301,5 +382,10 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     private void replace() {
+    }
+
+    private void finishPositionInput() {
+        textEditorModelCaretUpdate(null);
+        textEditorModel.requestFocusInWindow();
     }
 }
