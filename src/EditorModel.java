@@ -111,6 +111,12 @@ public class EditorModel extends JTextArea {
 
     private int getNumber(JFormattedTextField field) {
         Object value = field.getValue();
-        return value instanceof Number ? ((Number) value).intValue() : -1;
+        if (value instanceof Number) {
+            long number = ((Number) value).longValue();
+            if (number >= Integer.MIN_VALUE && number <= Integer.MAX_VALUE) {
+                return (int) number;
+            }
+        }
+        return -1;
     }
 }
