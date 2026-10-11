@@ -1,4 +1,6 @@
 
+import java.io.File;
+
 /**
  *
  * @author Tomas P
@@ -52,6 +54,7 @@ public class MainWindow extends javax.swing.JFrame {
         menuHelpInfo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("GUI Text Editor");
 
         textEditorModel.setColumns(20);
         textEditorModel.setRows(5);
@@ -378,7 +381,14 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     private void openFileDialog() {
-        FileChooser.chooseImage(this);
+        File selectedFile = FileChooser.chooseImage(this);
+        if (selectedFile != null) {
+            setApplicationTitle(selectedFile);
+        }
+    }
+
+    private void setApplicationTitle(File selectedFile) {
+        setTitle(selectedFile.getName());
     }
 
     private void replace() {
