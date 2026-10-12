@@ -1,4 +1,8 @@
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.List;
 import javax.swing.JTextArea;
 import javax.swing.JFormattedTextField;
 
@@ -6,6 +10,7 @@ public class EditorModel extends JTextArea {
 
     private String message = "";
     private int findPosition = -1;
+    private File file;
     InputDialog InputDialog = new InputDialog();
 
     public String getMessage() {
@@ -14,6 +19,29 @@ public class EditorModel extends JTextArea {
 
     public int getFindPosition() {
         return findPosition;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public boolean open(File selectedFile) {
+        try {
+            List<String> fileLines = Files.readAllLines(selectedFile.toPath());
+            String fileContent = String.join(System.lineSeparator(), fileLines);
+            
+            long fileSize = Files.size(selectedFile.toPath());
+            
+            this.setText(fileContent);
+            setCaretPosition(getDocument().getLength()
+            );
+            this.file = selectedFile.getAbsoluteFile();
+            message = "Datei '" + file.getName() + "' geladen. Größe: " + fileSize + " Bytes.";
+            return true;
+        } catch (IOException exception) {
+            message = "Datei konnte nicht geladen werden: " + exception.getMessage();
+            return false;
+        }
     }
 
     public boolean find(String searchInputValue, boolean ignoreCase) {
