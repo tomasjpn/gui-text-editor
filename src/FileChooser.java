@@ -6,7 +6,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class FileChooser {
 
-    public static File chooseImage(Component parent) {
+    public static File chooseTextFile(Component parent) {
         JFileChooser chooser = new JFileChooser();
 
         FileNameExtensionFilter filter

@@ -433,9 +433,12 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     private void openFileDialog() {
-        File selectedFile = FileChooser.chooseImage(this);
+        File selectedFile = FileChooser.chooseTextFile(this);
         if (selectedFile != null) {
-            setApplicationTitle(selectedFile);
+            if (textEditorModel.open(selectedFile)) {
+                setApplicationTitle(selectedFile);
+            }
+            responseTextField.append(textEditorModel.getMessage() + "\n");
         }
     }
 
