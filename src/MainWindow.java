@@ -11,6 +11,13 @@ public class MainWindow extends javax.swing.JFrame {
 
     public MainWindow() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent event) {
+                closeEditor();
+            }
+        });
         this.setLocation(70, 70);
         textEditorModel.setCaretPosition(0);
         textEditorModelCaretUpdate(null);
@@ -328,8 +335,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_menuEditSearchActionPerformed
 
     private void menuFileEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFileEndActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
+        closeEditor();
     }//GEN-LAST:event_menuFileEndActionPerformed
 
     private void textEditorModelCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_textEditorModelCaretUpdate
@@ -352,11 +358,16 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_columnInputFieldActionPerformed
 
     private void menuFileSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFileSaveActionPerformed
-        // TODO add your handling code here:
+        File currentFile = textEditorModel.getFile();
+        if (currentFile == null) {
+            saveAs();
+        } else {
+            saveTo(currentFile);
+        }
     }//GEN-LAST:event_menuFileSaveActionPerformed
 
     private void menuFileSaveAsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFileSaveAsActionPerformed
-        // TODO add your handling code here:
+        saveAs();
     }//GEN-LAST:event_menuFileSaveAsActionPerformed
 
     private void menuFileNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFileNewActionPerformed
@@ -444,6 +455,37 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void setApplicationTitle(File selectedFile) {
         setTitle(selectedFile.getName());
+    }
+
+    private void saveAs() {
+        File selectedFile = FileChooser.chooseSaveTextFile(this, textEditorModel.getFile());
+        if (selectedFile == null) {
+            return;
+        }
+
+        if (selectedFile.exists()) {
+            int answer = javax.swing.JOptionPane.showConfirmDialog(this,
+                    "Die Datei existiert bereits. Soll sie überschrieben werden?",
+                    "Datei überschreiben", javax.swing.JOptionPane.YES_NO_OPTION);
+            if (answer != javax.swing.JOptionPane.YES_OPTION) {
+                return;
+            }
+        }
+
+        saveTo(selectedFile);
+    }
+
+    private void saveTo(File selectedFile) {
+        if (textEditorModel.saveFile(selectedFile)) {
+            setApplicationTitle(textEditorModel.getFile());
+        }
+        responseTextField.append(textEditorModel.getMessage() + "\n");
+    }
+
+    private void closeEditor() {
+        if (!textEditorModel.isModified() || javax.swing.JOptionPane.showConfirmDialog(this, "Der Text wurde geändert. Möchten Sie den Editor wirklich beenden?", "Editor beenden", javax.swing.JOptionPane.YES_NO_OPTION) == javax.swing.JOptionPane.YES_OPTION) {
+            dispose();
+        }
     }
 
     private void replace() {
