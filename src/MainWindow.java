@@ -45,8 +45,14 @@ public class MainWindow extends javax.swing.JFrame {
         characterInputField = new javax.swing.JFormattedTextField(java.text.NumberFormat.getIntegerInstance());
         jMenuBar1 = new javax.swing.JMenuBar();
         menuFile = new javax.swing.JMenu();
+        menuFileNew = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
         menuFileOpen = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        menuFileSave = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        menuFileSaveAs = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
         menuFileEnd = new javax.swing.JMenuItem();
         menuEdit = new javax.swing.JMenu();
         menuEditSearch = new javax.swing.JMenuItem();
@@ -151,7 +157,17 @@ public class MainWindow extends javax.swing.JFrame {
 
         menuFile.setText("Datei");
 
-        menuFileOpen.setText("Öffnen");
+        menuFileNew.setText("Neu");
+        menuFileNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuFileNewActionPerformed(evt);
+            }
+        });
+        menuFile.add(menuFileNew);
+        menuFile.add(jSeparator4);
+
+        menuFileOpen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        menuFileOpen.setText("Laden");
         menuFileOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuFileOpenActionPerformed(evt);
@@ -159,6 +175,24 @@ public class MainWindow extends javax.swing.JFrame {
         });
         menuFile.add(menuFileOpen);
         menuFile.add(jSeparator1);
+
+        menuFileSave.setText("Speichern");
+        menuFileSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuFileSaveActionPerformed(evt);
+            }
+        });
+        menuFile.add(menuFileSave);
+        menuFile.add(jSeparator2);
+
+        menuFileSaveAs.setText("Speichern unter");
+        menuFileSaveAs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuFileSaveAsActionPerformed(evt);
+            }
+        });
+        menuFile.add(menuFileSaveAs);
+        menuFile.add(jSeparator3);
 
         menuFileEnd.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.ALT_DOWN_MASK));
         menuFileEnd.setText("Beenden");
@@ -317,6 +351,18 @@ public class MainWindow extends javax.swing.JFrame {
         finishPositionInput();
     }//GEN-LAST:event_columnInputFieldActionPerformed
 
+    private void menuFileSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFileSaveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuFileSaveActionPerformed
+
+    private void menuFileSaveAsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFileSaveAsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuFileSaveAsActionPerformed
+
+    private void menuFileNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFileNewActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuFileNewActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -354,6 +400,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelCharacter;
     private javax.swing.JLabel labelColumn;
@@ -363,7 +412,10 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuEditSearch;
     private javax.swing.JMenu menuFile;
     private javax.swing.JMenuItem menuFileEnd;
+    private javax.swing.JMenuItem menuFileNew;
     private javax.swing.JMenuItem menuFileOpen;
+    private javax.swing.JMenuItem menuFileSave;
+    private javax.swing.JMenuItem menuFileSaveAs;
     private javax.swing.JMenu menuHelp;
     private javax.swing.JMenuItem menuHelpInfo;
     private javax.swing.JPanel positionPanel;
