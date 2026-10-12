@@ -464,9 +464,7 @@ public class MainWindow extends javax.swing.JFrame {
         }
 
         if (selectedFile.exists()) {
-            int answer = javax.swing.JOptionPane.showConfirmDialog(this,
-                    "Die Datei existiert bereits. Soll sie überschrieben werden?",
-                    "Datei überschreiben", javax.swing.JOptionPane.YES_NO_OPTION);
+            int answer = InputDialog.showConfirmOverwriteFileDialog(this);
             if (answer != javax.swing.JOptionPane.YES_OPTION) {
                 return;
             }
@@ -483,7 +481,8 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     private void closeEditor() {
-        if (!textEditorModel.isModified() || javax.swing.JOptionPane.showConfirmDialog(this, "Der Text wurde geändert. Möchten Sie den Editor wirklich beenden?", "Editor beenden", javax.swing.JOptionPane.YES_NO_OPTION) == javax.swing.JOptionPane.YES_OPTION) {
+        if (!textEditorModel.isModified()
+                || InputDialog.showConfirmExitDialog(this) == javax.swing.JOptionPane.YES_OPTION) {
             dispose();
         }
     }

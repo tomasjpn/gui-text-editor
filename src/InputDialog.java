@@ -1,4 +1,5 @@
 
+import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
@@ -29,4 +30,18 @@ public class InputDialog extends JTextArea {
         );
     }
 
+    public static int showConfirmExitDialog(Component parent) {
+        return showConfirmation(parent, "Der Text wurde geändert. Möchten Sie den Editor wirklich beenden?", "Editor beenden");
+    }
+
+    public static int showConfirmOverwriteFileDialog(Component parent) {
+        return showConfirmation(parent, "Die Datei existiert bereits. Soll sie überschrieben werden?", "Datei überschreiben");
+    }
+
+    private static int showConfirmation(
+            Component parent, String message, String title) {
+        return JOptionPane.showConfirmDialog(
+                parent, message, title, JOptionPane.YES_NO_OPTION
+        );
+    }
 }
