@@ -7,20 +7,36 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class FileChooser {
 
     public static File chooseTextFile(Component parent) {
-        JFileChooser chooser = new JFileChooser();
+        JFileChooser fileChooser = createTextFileChooser();
 
-        FileNameExtensionFilter filter
-                = new FileNameExtensionFilter(
-                        "Textdateien", "txt", "java", "xml", "html", "sql", "jsp");
-
-        chooser.setFileFilter(filter);
-
-        int returnVal = chooser.showOpenDialog(parent);
+        int returnVal = fileChooser.showOpenDialog(parent);
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            return chooser.getSelectedFile();
+            return fileChooser.getSelectedFile();
         }
 
         return null;
+    }
+
+    public static File chooseSaveTextFile(Component parent, File suggestedFile) {
+        JFileChooser fileChooser = createTextFileChooser();
+        if (suggestedFile != null) {
+            fileChooser.setSelectedFile(suggestedFile);
+        }
+
+        int returnVal = fileChooser.showSaveDialog(parent);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            return fileChooser.getSelectedFile();
+        }
+
+        return null;
+    }
+
+    private static JFileChooser createTextFileChooser() {
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "Textdateien", "txt", "java", "xml", "html", "sql", "jsp");
+        fileChooser.setFileFilter(filter);
+        return fileChooser;
     }
 }

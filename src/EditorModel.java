@@ -11,6 +11,7 @@ public class EditorModel extends JTextArea {
     private String message = "";
     private int findPosition = -1;
     private File file;
+    private String savedContent = "";
     InputDialog InputDialog = new InputDialog();
 
     public String getMessage() {
@@ -25,6 +26,10 @@ public class EditorModel extends JTextArea {
         return file;
     }
 
+    public boolean isModified() {
+        return !getText().equals(this.savedContent);
+    }
+
     public boolean open(File selectedFile) {
         try {
             List<String> fileLines = Files.readAllLines(selectedFile.toPath());
@@ -33,13 +38,26 @@ public class EditorModel extends JTextArea {
             long fileSize = Files.size(selectedFile.toPath());
             
             this.setText(fileContent);
-            setCaretPosition(getDocument().getLength()
-            );
+            setCaretPosition(getDocument().getLength());
             this.file = selectedFile.getAbsoluteFile();
-            message = "Datei '" + file.getName() + "' geladen. Größe: " + fileSize + " Bytes.";
+            this.savedContent = fileContent;
+            this.message = "Datei '" + file.getName() + "' geladen. Größe: " + fileSize + " Bytes.";
             return true;
         } catch (IOException exception) {
-            message = "Datei konnte nicht geladen werden: " + exception.getMessage();
+            this.message = "Datei konnte nicht geladen werden: " + exception.getMessage();
+            return false;
+        }
+    }
+
+    public boolean saveFile(File targetFile) {
+        try {
+            Files.writeString(targetFile.toPath(), getText());
+            this.file = targetFile.getAbsoluteFile();
+            this.savedContent = getText();
+            this.message = "Datei '" + file.getName() + "' gespeichert.";
+            return true;
+        } catch (IOException exception) {
+            this.message = "Datei konnte nicht gespeichert werden: " + exception.getMessage();
             return false;
         }
     }
