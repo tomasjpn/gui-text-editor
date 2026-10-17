@@ -70,7 +70,7 @@ public class MainWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("GUI Text Editor");
 
-        textEditorModel.setColumns(20);
+        textEditorModel.setColumns(60);
         textEditorModel.setRows(5);
         textEditorModel.setText("Hier steht mehrzeiliger Text.\nDurch den Button \"Suchen\" kann man sich den Suchtext\naus dem Feld \"tfSuchen\" im Editorfeld finden lassen.\n\nDer \"Suchtext\" soll dann markiert werden.\n\nEin Text wie \"SuChTeXt\" lässt sich nur finden,\nwenn \"Großschreibung ignorieren\" ausgewählt ist.");
         textEditorModel.addCaretListener(new javax.swing.event.CaretListener() {
@@ -82,7 +82,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         responseTextField.setEditable(false);
         responseTextField.setBackground(new java.awt.Color(204, 204, 204));
-        responseTextField.setColumns(20);
+        responseTextField.setColumns(60);
         responseTextField.setRows(5);
         responseTextField.setFocusable(false);
         jScrollPane2.setViewportView(responseTextField);
@@ -250,22 +250,22 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(searchInputField)
                                         .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jTextField1)
-                                        .addComponent(btnReplace, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))
+                                        .addComponent(btnReplace, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(btnReplaceAll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(chbCaseSensivity)))
                             .addComponent(jLabel1))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(positionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(positionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
