@@ -1,5 +1,7 @@
 
 import java.io.File;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -530,16 +532,18 @@ public class MainWindow extends javax.swing.JFrame {
         String searchText = searchInputField.getText();
         String textToReplace = replaceInputField.getText();
         String editorTextContent = textEditorModel.getText();
+        String pattern = Pattern.quote(searchText);
 
         if (searchText.isEmpty()) {
             return;
         }
 
         if (chbCaseSensivity.isSelected()) {
-            editorTextContent = editorTextContent.replaceAll("(?iu)" + searchText, textToReplace);
-        } else {
-            editorTextContent = editorTextContent.replaceAll(searchText, textToReplace);
+            pattern = "(?iu)" + pattern;
         }
+
+        editorTextContent = editorTextContent.replaceAll(
+                pattern, Matcher.quoteReplacement(textToReplace));
 
         textEditorModel.setText(editorTextContent);
     }
