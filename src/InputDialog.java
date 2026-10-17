@@ -22,8 +22,10 @@ public class InputDialog extends JTextArea {
         JOptionPane.showMessageDialog(
                 this,
                 "<html>"
-                + "<b><h1>Tomas Pham</h1></b>"
-                + "<p>ITO8<br>28.09.2026</p>"
+                + "<b>Copyright © 2026</b><br>"
+                + "<h1>Tomas Pham</h1>"
+                + "<p>RBBK Klasse - ITO8</p>"
+                + "<p>Projektbeginn: 28.09.2026</p>"
                 + "</html>",
                 "Info",
                 JOptionPane.INFORMATION_MESSAGE
