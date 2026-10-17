@@ -229,7 +229,8 @@
     </Container>
     <Component class="javax.swing.JTextField" name="searchInputField">
       <Properties>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="text" type="java.lang.String" value="Suchtext"/>
+        <Property name="toolTipText" type="java.lang.String" value="Suchtext"/>
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
       </Properties>
       <Events>
@@ -250,6 +251,13 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ersatztext"/>
+        <Property name="toolTipText" type="java.lang.String" value="Ersatztext"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnReplace">
       <Properties>

@@ -95,7 +95,8 @@ public class MainWindow extends javax.swing.JFrame {
         responseTextField.setFocusable(false);
         jScrollPane2.setViewportView(responseTextField);
 
-        searchInputField.setToolTipText("");
+        searchInputField.setText("Suchtext");
+        searchInputField.setToolTipText("Suchtext");
         searchInputField.setName(""); // NOI18N
         searchInputField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,6 +112,14 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         jLabel1.setText("Meldungen:");
+
+        jTextField1.setText("Ersatztext");
+        jTextField1.setToolTipText("Ersatztext");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         btnReplace.setText("Ersetzen");
         btnReplace.addActionListener(new java.awt.event.ActionListener() {
@@ -382,6 +391,10 @@ public class MainWindow extends javax.swing.JFrame {
     private void menuFileNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFileNewActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menuFileNewActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
