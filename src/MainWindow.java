@@ -325,6 +325,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void btnReplaceAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReplaceAllActionPerformed
         // TODO add your handling code here:
+        replaceAll();
     }//GEN-LAST:event_btnReplaceAllActionPerformed
 
     private void btnReplaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReplaceActionPerformed
@@ -511,17 +512,36 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void replace() {
         String searchText = searchInputField.getText();
+        String textToReplace = replaceInputField.getText();
         if (searchText.isEmpty()) {
             responseTextField.append("Suchtext darf nicht leer sein.\n");
             return;
         }
 
         if (textEditorModel.find(searchText, chbCaseSensivity.isSelected())) {
-            textEditorModel.replaceSelection(replaceInputField.getText());
+            textEditorModel.replaceSelection(textToReplace);
         } else {
             responseTextField.append(textEditorModel.getMessage() + "\n");
         }
         textEditorModel.requestFocusInWindow();
+    }
+
+    private void replaceAll() {
+        String searchText = searchInputField.getText();
+        String textToReplace = replaceInputField.getText();
+        String editorTextContent = textEditorModel.getText();
+
+        if (searchText.isEmpty()) {
+            return;
+        }
+
+        if (chbCaseSensivity.isSelected()) {
+            editorTextContent = editorTextContent.replaceAll("(?iu)" + searchText, textToReplace);
+        } else {
+            editorTextContent = editorTextContent.replaceAll(searchText, textToReplace);
+        }
+
+        textEditorModel.setText(editorTextContent);
     }
 
     private void finishPositionInput() {
