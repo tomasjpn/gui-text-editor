@@ -137,7 +137,7 @@
                                   <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="searchInputField" max="32767" attributes="0"/>
                                       <Component id="btnSearch" max="32767" attributes="0"/>
-                                      <Component id="jTextField1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="replaceInputField" alignment="0" max="32767" attributes="0"/>
                                       <Component id="btnReplace" alignment="0" min="-2" pref="187" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="btnReplaceAll" alignment="1" min="-2" pref="187" max="-2" attributes="0"/>
@@ -171,7 +171,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnSearch" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
-                      <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+                      <Component id="replaceInputField" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnReplace" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -250,13 +250,13 @@
         <Property name="text" type="java.lang.String" value="Meldungen:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="replaceInputField">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ersatztext"/>
         <Property name="toolTipText" type="java.lang.String" value="Ersatztext"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="replaceInputFieldActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnReplace">

@@ -48,7 +48,7 @@ public class MainWindow extends javax.swing.JFrame {
         searchInputField = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        replaceInputField = new javax.swing.JTextField();
         btnReplace = new javax.swing.JButton();
         btnReplaceAll = new javax.swing.JButton();
         chbCaseSensivity = new javax.swing.JCheckBox();
@@ -113,11 +113,11 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel1.setText("Meldungen:");
 
-        jTextField1.setText("Ersatztext");
-        jTextField1.setToolTipText("Ersatztext");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        replaceInputField.setText("Ersatztext");
+        replaceInputField.setToolTipText("Ersatztext");
+        replaceInputField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                replaceInputFieldActionPerformed(evt);
             }
         });
 
@@ -273,7 +273,7 @@ public class MainWindow extends javax.swing.JFrame {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(searchInputField)
                                         .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jTextField1)
+                                        .addComponent(replaceInputField)
                                         .addComponent(btnReplace, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(btnReplaceAll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(chbCaseSensivity)))
@@ -297,7 +297,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSearch)
                         .addGap(73, 73, 73)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(replaceInputField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnReplace)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -392,9 +392,9 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_menuFileNewActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void replaceInputFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_replaceInputFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_replaceInputFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -436,7 +436,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelCharacter;
     private javax.swing.JLabel labelColumn;
     private javax.swing.JLabel labelLine;
@@ -452,6 +451,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu menuHelp;
     private javax.swing.JMenuItem menuHelpInfo;
     private javax.swing.JPanel positionPanel;
+    private javax.swing.JTextField replaceInputField;
     private javax.swing.JTextArea responseTextField;
     private javax.swing.JTextField searchInputField;
     private EditorModel textEditorModel;
@@ -510,6 +510,18 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     private void replace() {
+        String searchText = searchInputField.getText();
+        if (searchText.isEmpty()) {
+            responseTextField.append("Suchtext darf nicht leer sein.\n");
+            return;
+        }
+
+        if (textEditorModel.find(searchText, chbCaseSensivity.isSelected())) {
+            textEditorModel.replaceSelection(replaceInputField.getText());
+        } else {
+            responseTextField.append(textEditorModel.getMessage() + "\n");
+        }
+        textEditorModel.requestFocusInWindow();
     }
 
     private void finishPositionInput() {
