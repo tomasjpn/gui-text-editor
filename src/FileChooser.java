@@ -34,9 +34,8 @@ public class FileChooser {
 
     private static JFileChooser createTextFileChooser() {
         JFileChooser fileChooser = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                "Textdateien", "txt", "java", "xml", "html", "sql", "jsp");
-        fileChooser.setFileFilter(filter);
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Text, CSV, und Java Dateien (*.txt, *.csv, *.java)", "txt", "csv", "java");
+            fileChooser.setFileFilter(filter);
         return fileChooser;
     }
 }
