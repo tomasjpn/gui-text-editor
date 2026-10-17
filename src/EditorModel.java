@@ -30,13 +30,17 @@ public class EditorModel extends JTextArea {
         return !getText().equals(this.savedContent);
     }
 
+    public void initialFileContent(String initialFileContent) {
+        this.savedContent = initialFileContent;
+    }
+
     public boolean open(File selectedFile) {
         try {
             List<String> fileLines = Files.readAllLines(selectedFile.toPath());
             String fileContent = String.join(System.lineSeparator(), fileLines);
-            
+
             long fileSize = Files.size(selectedFile.toPath());
-            
+
             this.setText(fileContent);
             setCaretPosition(getDocument().getLength());
             this.file = selectedFile.getAbsoluteFile();

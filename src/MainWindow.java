@@ -21,6 +21,7 @@ public class MainWindow extends javax.swing.JFrame {
         this.setLocation(70, 70);
         textEditorModel.setCaretPosition(0);
         textEditorModelCaretUpdate(null);
+        textEditorModel.initialFileContent(textEditorModel.getText());
     }
 
     /**
