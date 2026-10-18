@@ -1,4 +1,6 @@
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,6 +15,14 @@ public class EditorModel extends JTextArea {
     private File file;
     private String savedContent = "";
     InputDialog InputDialog = new InputDialog();
+
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        int lineX = getInsets().left + (60 - 1) * getFontMetrics(getFont()).charWidth('_');
+
+        g.setColor(Color.LIGHT_GRAY);
+        g.drawLine(lineX, 0, lineX, getHeight());
+    }
 
     public String getMessage() {
         return message;
