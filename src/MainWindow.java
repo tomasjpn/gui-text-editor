@@ -508,6 +508,26 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     private void openFileDialog() {
+        if (textEditorModel.isModified()) {
+            int userInputSelection = InputDialog.showConfirmLoadNewDocumentDialog(this);
+            if (userInputSelection == InputDialog.NEW_SAVE_OPTION) {
+                SaveResult saveResult = saveCurrentDocumentResult();
+                if (saveResult == SaveResult.SAVED) {
+                    InputDialog.showDocumentLoadSaved(this);
+                } else if (saveResult == SaveResult.CANCELLED) {
+                    InputDialog.showDocumentLoadSaveCancelled(this);
+                    return;
+                } else {
+                    InputDialog.showDocumentLoadSaveFailed(this, textEditorModel.getMessage());
+                    return;
+                }
+            } else if (userInputSelection != InputDialog.NEW_DISCARD_OPTION) {
+                return;
+            } else {
+                InputDialog.showDocumentLoadDiscardNotice(this);
+            }
+        }
+
         File selectedFile = FileChooser.chooseTextFile(this);
         if (selectedFile != null) {
             if (textEditorModel.open(selectedFile)) {
@@ -521,37 +541,51 @@ public class MainWindow extends javax.swing.JFrame {
         setTitle(selectedFile.getName());
     }
 
+    private enum SaveResult {
+        SAVED,
+        CANCELLED,
+        FAILED
+    }
+
     private boolean saveCurrentDocument() {
+        return saveCurrentDocumentResult() == SaveResult.SAVED;
+    }
+
+    private SaveResult saveCurrentDocumentResult() {
         File currentFile = textEditorModel.getFile();
         if (currentFile == null) {
-            return saveAs();
+            return saveAsResult();
         }
-        return saveTo(currentFile);
+        return saveToResult(currentFile);
     }
 
     private boolean saveAs() {
+        return saveAsResult() == SaveResult.SAVED;
+    }
+
+    private SaveResult saveAsResult() {
         File selectedFile = FileChooser.chooseSaveTextFile(this, textEditorModel.getFile());
         if (selectedFile == null) {
-            return false;
+            return SaveResult.CANCELLED;
         }
 
         if (selectedFile.exists()) {
             int answer = InputDialog.showConfirmOverwriteFileDialog(this);
             if (answer != javax.swing.JOptionPane.YES_OPTION) {
-                return false;
+                return SaveResult.CANCELLED;
             }
         }
 
-        return saveTo(selectedFile);
+        return saveToResult(selectedFile);
     }
 
-    private boolean saveTo(File selectedFile) {
+    private SaveResult saveToResult(File selectedFile) {
         boolean saved = textEditorModel.saveFile(selectedFile);
         if (saved) {
             setApplicationTitle(textEditorModel.getFile());
         }
         responseTextField.append(textEditorModel.getMessage() + "\n");
-        return saved;
+        return saved ? SaveResult.SAVED : SaveResult.FAILED;
     }
 
     private void newDocument() {

@@ -52,6 +52,62 @@ public class InputDialog extends JTextArea {
         );
     }
 
+    public static int showConfirmLoadNewDocumentDialog(Component parent) {
+        return JOptionPane.showOptionDialog(
+                parent,
+                "Der Text wurde geändert. Möchten Sie ihn vor Laden eines neuen Dokuments speichern?",
+                "Neues Dokument laden",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                new Object[]{"Speichern", "Verwerfen", "Abbrechen"},
+                "Speichern"
+        );
+    }
+
+    public static void showDocumentLoadSaved(Component parent) {
+        showDocumentLoadFeedback(
+                parent,
+                "Änderungen wurden gespeichert. Wählen Sie jetzt eine Datei zum Laden aus.",
+                "Speichern erfolgreich",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+    }
+
+    public static void showDocumentLoadSaveCancelled(Component parent) {
+        showDocumentLoadFeedback(
+                parent,
+                "Speichern wurde abgebrochen. Das Laden wurde nicht gestartet; Ihre Änderungen bleiben erhalten.",
+                "Laden abgebrochen",
+                JOptionPane.WARNING_MESSAGE
+        );
+    }
+
+    public static void showDocumentLoadSaveFailed(Component parent, String saveMessage) {
+        showDocumentLoadFeedback(
+                parent,
+                "Die Änderungen wurden nicht gespeichert. Das Laden wurde abgebrochen, damit der aktuelle Text erhalten bleibt.\n\n"
+                + saveMessage,
+                "Speichern fehlgeschlagen",
+                JOptionPane.ERROR_MESSAGE
+        );
+    }
+
+    public static void showDocumentLoadDiscardNotice(Component parent) {
+        showDocumentLoadFeedback(
+                parent,
+                "Die Änderungen wurden nicht gespeichert. Wenn Sie jetzt eine Datei laden, wird der aktuelle Text ersetzt.\n"
+                + "Brechen Sie die Dateiauswahl ab, bleibt der aktuelle Text geöffnet.",
+                "Änderungen nicht gespeichert",
+                JOptionPane.WARNING_MESSAGE
+        );
+    }
+
+    private static void showDocumentLoadFeedback(
+            Component parent, String message, String title, int messageType) {
+        JOptionPane.showMessageDialog(parent, message, title, messageType);
+    }
+
     public static int showConfirmOverwriteFileDialog(Component parent) {
         return showConfirmation(parent, "Die Datei existiert bereits. Soll sie überschrieben werden?", "Datei überschreiben");
     }
