@@ -1,4 +1,5 @@
 
+import java.awt.Font;
 import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -86,6 +87,7 @@ public class MainWindow extends javax.swing.JFrame {
         textEditorModel.setColumns(60);
         textEditorModel.setRows(5);
         textEditorModel.setText("Hier steht mehrzeiliger Text.\nDurch den Button \"Suchen\" kann man sich den Suchtext\naus dem Feld \"tfSuchen\" im Editorfeld finden lassen.\n\nDer \"Suchtext\" soll dann markiert werden.\n\nEin Text wie \"SuChTeXt\" lässt sich nur finden,\nwenn \"Großschreibung ignorieren\" ausgewählt ist.");
+        textEditorModel.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         textEditorModel.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 textEditorModelCaretUpdate(evt);
