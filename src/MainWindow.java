@@ -76,6 +76,7 @@ public class MainWindow extends javax.swing.JFrame {
         menuFileEnd = new javax.swing.JMenuItem();
         menuEdit = new javax.swing.JMenu();
         menuEditSearch = new javax.swing.JMenuItem();
+        menuEditSpecialChar = new javax.swing.JMenuItem();
         menuHelp = new javax.swing.JMenu();
         menuHelpInfo = new javax.swing.JMenuItem();
 
@@ -263,6 +264,15 @@ public class MainWindow extends javax.swing.JFrame {
         });
         menuEdit.add(menuEditSearch);
 
+        menuEditSpecialChar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        menuEditSpecialChar.setText("Sonderzeichen");
+        menuEditSpecialChar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuEditSpecialCharActionPerformed(evt);
+            }
+        });
+        menuEdit.add(menuEditSpecialChar);
+
         jMenuBar1.add(menuEdit);
 
         menuHelp.setText("Hilfe");
@@ -376,6 +386,10 @@ public class MainWindow extends javax.swing.JFrame {
         search();
     }//GEN-LAST:event_menuEditSearchActionPerformed
 
+    private void menuEditSpecialCharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditSpecialCharActionPerformed
+        openSpecialCharDialog();
+    }//GEN-LAST:event_menuEditSpecialCharActionPerformed
+
     private void menuFileEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFileEndActionPerformed
         closeEditor();
     }//GEN-LAST:event_menuFileEndActionPerformed
@@ -472,6 +486,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField lineInputField;
     private javax.swing.JMenu menuEdit;
     private javax.swing.JMenuItem menuEditSearch;
+    private javax.swing.JMenuItem menuEditSpecialChar;
     private javax.swing.JMenu menuFile;
     private javax.swing.JMenuItem menuFileEnd;
     private javax.swing.JMenuItem menuFileNew;
