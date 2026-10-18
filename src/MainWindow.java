@@ -416,12 +416,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_columnInputFieldActionPerformed
 
     private void menuFileSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFileSaveActionPerformed
-        File currentFile = textEditorModel.getFile();
-        if (currentFile == null) {
-            saveAs();
-        } else {
-            saveTo(currentFile);
-        }
+        saveCurrentDocument();
     }//GEN-LAST:event_menuFileSaveActionPerformed
 
     private void menuFileSaveAsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFileSaveAsActionPerformed
@@ -429,7 +424,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_menuFileSaveAsActionPerformed
 
     private void menuFileNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFileNewActionPerformed
-        // TODO add your handling code here:
+        newDocument();
     }//GEN-LAST:event_menuFileNewActionPerformed
 
     private void replaceInputFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_replaceInputFieldActionPerformed
@@ -526,27 +521,56 @@ public class MainWindow extends javax.swing.JFrame {
         setTitle(selectedFile.getName());
     }
 
-    private void saveAs() {
+    private boolean saveCurrentDocument() {
+        File currentFile = textEditorModel.getFile();
+        if (currentFile == null) {
+            return saveAs();
+        }
+        return saveTo(currentFile);
+    }
+
+    private boolean saveAs() {
         File selectedFile = FileChooser.chooseSaveTextFile(this, textEditorModel.getFile());
         if (selectedFile == null) {
-            return;
+            return false;
         }
 
         if (selectedFile.exists()) {
             int answer = InputDialog.showConfirmOverwriteFileDialog(this);
             if (answer != javax.swing.JOptionPane.YES_OPTION) {
+                return false;
+            }
+        }
+
+        return saveTo(selectedFile);
+    }
+
+    private boolean saveTo(File selectedFile) {
+        boolean saved = textEditorModel.saveFile(selectedFile);
+        if (saved) {
+            setApplicationTitle(textEditorModel.getFile());
+        }
+        responseTextField.append(textEditorModel.getMessage() + "\n");
+        return saved;
+    }
+
+    private void newDocument() {
+        if (textEditorModel.isModified()) {
+            int userInputSelection = InputDialog.showConfirmNewDocumentDialog(this);
+            if (userInputSelection == InputDialog.NEW_SAVE_OPTION) {
+                if (!saveCurrentDocument()) {
+                    return;
+                }
+            } else if (userInputSelection != InputDialog.NEW_DISCARD_OPTION) {
                 return;
             }
         }
 
-        saveTo(selectedFile);
-    }
-
-    private void saveTo(File selectedFile) {
-        if (textEditorModel.saveFile(selectedFile)) {
-            setApplicationTitle(textEditorModel.getFile());
-        }
+        textEditorModel.createNewDocument();
+        setTitle("Unbenannt - GUI Text Editor");
+        textEditorModelCaretUpdate(null);
         responseTextField.append(textEditorModel.getMessage() + "\n");
+        textEditorModel.requestFocusInWindow();
     }
 
     private void closeEditor() {

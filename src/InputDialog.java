@@ -5,6 +5,9 @@ import javax.swing.JTextArea;
 
 public class InputDialog extends JTextArea {
 
+    public static final int NEW_SAVE_OPTION = 0;
+    public static final int NEW_DISCARD_OPTION = 1;
+
     public int showQuestionMessage() {
         return JOptionPane.showOptionDialog(
                 this,
@@ -34,6 +37,19 @@ public class InputDialog extends JTextArea {
 
     public static int showConfirmExitDialog(Component parent) {
         return showConfirmation(parent, "Der Text wurde geändert. Möchten Sie den Editor wirklich beenden?", "Editor beenden");
+    }
+
+    public static int showConfirmNewDocumentDialog(Component parent) {
+        return JOptionPane.showOptionDialog(
+                parent,
+                "Der Text wurde geändert. Möchten Sie ihn vor dem Erstellen eines neuen Dokuments speichern?",
+                "Neues Dokument",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                new Object[]{"Speichern", "Verwerfen", "Abbrechen"},
+                "Speichern"
+        );
     }
 
     public static int showConfirmOverwriteFileDialog(Component parent) {

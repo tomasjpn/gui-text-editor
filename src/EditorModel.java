@@ -44,6 +44,15 @@ public class EditorModel extends JTextArea {
         this.savedContent = initialFileContent;
     }
 
+    public void createNewDocument() {
+        this.setText("");
+        this.setCaretPosition(0);
+        this.file = null;
+        this.savedContent = "";
+        this.findPosition = -1;
+        this.message = "Neues Dokument wurde erstellt.";
+    }
+
     public boolean open(File selectedFile) {
         try {
             List<String> fileLines = Files.readAllLines(selectedFile.toPath());
