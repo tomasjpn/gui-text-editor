@@ -29,6 +29,14 @@ public class InputDialog extends JTextArea {
                 + "<h1>Tomas Pham</h1>"
                 + "<p>RBBK Klasse - ITO8</p>"
                 + "<p>Projektbeginn: 28.09.2026</p>"
+                + "<h2>Zusatzfunktion: Gespeicherte Textstände</h2>"
+                + "Die Schaltflächen 'Rückgängig' und 'Wiederholen' unter dem Editor-Fenster sowie im Menü-Option 'Datei' &gt; 'Rückgängig / Wiederholen' wechseln zwischen gespeicherten Textständen.<br>"
+                + "Strg+Z: geht zurück; Strg+Y: stellt den nächsten Textstand wieder her.<br>"
+                + "Ein erfolgreicher Speichervorgang legt bei geändertem Text einen neuen Wiederherstellungspunkt an.<br>"
+                + "<b>Achtung:</b> Ungespeicherte Änderungen sind keine eigenen Schritte.<br>"
+                + "Rückgängig setzt den Text zuerst auf den letzten Speicherstand zurück und verwirft diese Änderungen.<br>"
+                + "Speichern Sie wichtige Zwischenstände regelmäßig.<br>"
+                + "Beim Erstellen eines neuen Dokuments oder Laden einer Datei beginnt der Verlauf neu."
                 + "</html>",
                 "Info",
                 JOptionPane.INFORMATION_MESSAGE

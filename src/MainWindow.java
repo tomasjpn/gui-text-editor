@@ -14,6 +14,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     public MainWindow() {
         initComponents();
+        textEditorModel.getDocument().addUndoableEditListener(event -> updateUndoRedoState());
 
         lineInputField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
                 new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("0000"))));
@@ -33,6 +34,7 @@ public class MainWindow extends javax.swing.JFrame {
         textEditorModel.setCaretPosition(0);
         textEditorModelCaretUpdate(null);
         textEditorModel.initialFileContent(textEditorModel.getText());
+        updateUndoRedoState();
     }
 
     /**
@@ -62,6 +64,9 @@ public class MainWindow extends javax.swing.JFrame {
         columnInputField = new javax.swing.JFormattedTextField(java.text.NumberFormat.getIntegerInstance());
         labelCharacter = new javax.swing.JLabel();
         characterInputField = new javax.swing.JFormattedTextField(java.text.NumberFormat.getIntegerInstance());
+        undoPanel = new javax.swing.JPanel();
+        btnUndo = new javax.swing.JButton();
+        btnRedo = new javax.swing.JButton();
         customLogo = new CustomLogo();
         btnSpecialChar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -74,6 +79,9 @@ public class MainWindow extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         menuFileSaveAs = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        menuFileUndo = new javax.swing.JMenuItem();
+        menuFileRedo = new javax.swing.JMenuItem();
+        jSeparator5 = new javax.swing.JPopupMenu.Separator();
         menuFileEnd = new javax.swing.JMenuItem();
         menuEdit = new javax.swing.JMenu();
         menuEditSearch = new javax.swing.JMenuItem();
@@ -187,6 +195,24 @@ public class MainWindow extends javax.swing.JFrame {
         });
         positionPanel.add(characterInputField);
 
+        undoPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0));
+
+        btnUndo.setText("Rückgängig");
+        btnUndo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUndoActionPerformed(evt);
+            }
+        });
+        undoPanel.add(btnUndo);
+
+        btnRedo.setText("Wiederholen");
+        btnRedo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRedoActionPerformed(evt);
+            }
+        });
+        undoPanel.add(btnRedo);
+
         javax.swing.GroupLayout customLogoLayout = new javax.swing.GroupLayout(customLogo);
         customLogo.setLayout(customLogoLayout);
         customLogoLayout.setHorizontalGroup(
@@ -226,6 +252,7 @@ public class MainWindow extends javax.swing.JFrame {
         menuFile.add(menuFileOpen);
         menuFile.add(jSeparator1);
 
+        menuFileSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         menuFileSave.setText("Speichern");
         menuFileSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -243,6 +270,25 @@ public class MainWindow extends javax.swing.JFrame {
         });
         menuFile.add(menuFileSaveAs);
         menuFile.add(jSeparator3);
+
+        menuFileUndo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        menuFileUndo.setText("Rückgängig");
+        menuFileUndo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuFileUndoActionPerformed(evt);
+            }
+        });
+        menuFile.add(menuFileUndo);
+
+        menuFileRedo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        menuFileRedo.setText("Wiederholen");
+        menuFileRedo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuFileRedoActionPerformed(evt);
+            }
+        });
+        menuFile.add(menuFileRedo);
+        menuFile.add(jSeparator5);
 
         menuFileEnd.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.ALT_DOWN_MASK));
         menuFileEnd.setText("Beenden");
@@ -299,6 +345,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
+                    .addComponent(undoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
                     .addComponent(jLabel1)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
                     .addComponent(positionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -322,6 +369,8 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(undoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -396,6 +445,22 @@ public class MainWindow extends javax.swing.JFrame {
         closeEditor();
     }//GEN-LAST:event_menuFileEndActionPerformed
 
+    private void btnUndoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUndoActionPerformed
+        undoDocument();
+    }//GEN-LAST:event_btnUndoActionPerformed
+
+    private void btnRedoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedoActionPerformed
+        redoDocument();
+    }//GEN-LAST:event_btnRedoActionPerformed
+
+    private void menuFileUndoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFileUndoActionPerformed
+        undoDocument();
+    }//GEN-LAST:event_menuFileUndoActionPerformed
+
+    private void menuFileRedoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFileRedoActionPerformed
+        redoDocument();
+    }//GEN-LAST:event_menuFileRedoActionPerformed
+
     private void textEditorModelCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_textEditorModelCaretUpdate
         textEditorModel.updatePositionFields(lineInputField, columnInputField, characterInputField);
     }//GEN-LAST:event_textEditorModelCaretUpdate
@@ -465,6 +530,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton btnReplaceAll;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSpecialChar;
+    private javax.swing.JButton btnRedo;
+    private javax.swing.JButton btnUndo;
     private javax.swing.JFormattedTextField characterInputField;
     private javax.swing.JCheckBox chbCaseSensivity;
     private javax.swing.JFormattedTextField columnInputField;
@@ -477,6 +544,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
+    private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JLabel labelCharacter;
     private javax.swing.JLabel labelColumn;
     private javax.swing.JLabel labelLine;
@@ -490,9 +558,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuFileOpen;
     private javax.swing.JMenuItem menuFileSave;
     private javax.swing.JMenuItem menuFileSaveAs;
+    private javax.swing.JMenuItem menuFileRedo;
+    private javax.swing.JMenuItem menuFileUndo;
     private javax.swing.JMenu menuHelp;
     private javax.swing.JMenuItem menuHelpInfo;
     private javax.swing.JPanel positionPanel;
+    private javax.swing.JPanel undoPanel;
     private javax.swing.JTextField replaceInputField;
     private javax.swing.JTextArea responseTextField;
     private javax.swing.JTextField searchInputField;
@@ -532,6 +603,7 @@ public class MainWindow extends javax.swing.JFrame {
         if (selectedFile != null) {
             if (textEditorModel.open(selectedFile)) {
                 setApplicationTitle(selectedFile);
+                updateUndoRedoState();
             }
             responseTextField.append(textEditorModel.getMessage() + "\n");
         }
@@ -583,6 +655,7 @@ public class MainWindow extends javax.swing.JFrame {
         boolean saved = textEditorModel.saveFile(selectedFile);
         if (saved) {
             setApplicationTitle(textEditorModel.getFile());
+            updateUndoRedoState();
         }
         responseTextField.append(textEditorModel.getMessage() + "\n");
         return saved ? SaveResult.SAVED : SaveResult.FAILED;
@@ -601,6 +674,7 @@ public class MainWindow extends javax.swing.JFrame {
         }
 
         textEditorModel.createNewDocument();
+        updateUndoRedoState();
         setTitle("Unbenannt - GUI Text Editor");
         textEditorModelCaretUpdate(null);
         responseTextField.append(textEditorModel.getMessage() + "\n");
@@ -664,5 +738,24 @@ public class MainWindow extends javax.swing.JFrame {
             textEditorModel.replaceSelection(charSymbol);
         }
         textEditorModel.requestFocusInWindow();
+    }
+
+    private void undoDocument() {
+        textEditorModel.undo();
+        responseTextField.append(textEditorModel.getMessage() + "\n");
+    }
+
+    private void redoDocument() {
+        textEditorModel.redo();
+        responseTextField.append(textEditorModel.getMessage() + "\n");
+    }
+
+    private void updateUndoRedoState() {
+        boolean canUndo = textEditorModel.canUndo();
+        boolean canRedo = textEditorModel.canRedo();
+        btnUndo.setEnabled(canUndo);
+        menuFileUndo.setEnabled(canUndo);
+        btnRedo.setEnabled(canRedo);
+        menuFileRedo.setEnabled(canRedo);
     }
 }

@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTextArea;
 import javax.swing.JFormattedTextField;
@@ -14,7 +15,13 @@ public class EditorModel extends JTextArea {
     private int findPosition = -1;
     private File file;
     private String savedContent = "";
+    private final List<String> savedTextHistory = new ArrayList<>();
+    private int savedTextPosition;
     InputDialog InputDialog = new InputDialog();
+
+    public EditorModel() {
+        resetTextHistory();
+    }
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -42,6 +49,7 @@ public class EditorModel extends JTextArea {
 
     public void initialFileContent(String initialFileContent) {
         this.savedContent = initialFileContent;
+        resetTextHistory();
     }
 
     public void createNewDocument() {
@@ -51,6 +59,7 @@ public class EditorModel extends JTextArea {
         this.savedContent = "";
         this.findPosition = -1;
         this.message = "Neues Dokument wurde erstellt.";
+        resetTextHistory();
     }
 
     public boolean open(File selectedFile) {
@@ -65,6 +74,7 @@ public class EditorModel extends JTextArea {
             this.file = selectedFile.getAbsoluteFile();
             this.savedContent = fileContent;
             this.message = "Datei '" + file.getName() + "' geladen. Größe: " + fileSize + " Bytes.";
+            resetTextHistory();
             return true;
         } catch (IOException exception) {
             this.message = "Datei konnte nicht geladen werden: " + exception.getMessage();
@@ -78,10 +88,55 @@ public class EditorModel extends JTextArea {
             this.file = targetFile.getAbsoluteFile();
             this.savedContent = getText();
             this.message = "Datei '" + file.getName() + "' gespeichert.";
+            saveTextCheckpoint();
             return true;
         } catch (IOException exception) {
             this.message = "Datei konnte nicht gespeichert werden: " + exception.getMessage();
             return false;
+        }
+    }
+
+    public boolean canUndo() {
+        return !matchesCurrentSavedCheckpoint() || this.savedTextPosition > 0;
+    }
+
+    public boolean canRedo() {
+        return matchesCurrentSavedCheckpoint() && this.savedTextPosition < this.savedTextHistory.size() - 1;
+    }
+
+    public void undo() {
+        boolean wasAtCurrentSavedCheckpoint = matchesCurrentSavedCheckpoint();
+        if (wasAtCurrentSavedCheckpoint) {
+            this.savedTextPosition--;
+            this.message = "Rückgängig: Vorherigen Speicherstand wiederhergestellt.";
+        } else {
+            this.message = "Rückgängig: Ungespeicherte Änderungen verworfen; letzter Speicherstand wiederhergestellt.";
+        }
+        setText(this.savedTextHistory.get(this.savedTextPosition));
+    }
+
+    public void redo() {
+        this.savedTextPosition++;
+        setText(this.savedTextHistory.get(this.savedTextPosition));
+        this.message = "Wiederholen: Nächsten Speicherstand wiederhergestellt.";
+    }
+
+    private boolean matchesCurrentSavedCheckpoint() {
+        return getText().equals(this.savedTextHistory.get(this.savedTextPosition));
+    }
+
+    private void resetTextHistory() {
+        this.savedTextHistory.clear();
+        this.savedTextHistory.add(getText());
+        this.savedTextPosition = 0;
+    }
+
+    private void saveTextCheckpoint() {
+        String text = getText();
+        if (!text.equals(this.savedTextHistory.get(this.savedTextPosition))) {
+            this.savedTextHistory.subList(this.savedTextPosition + 1, this.savedTextHistory.size()).clear();
+            this.savedTextHistory.add(text);
+            this.savedTextPosition = this.savedTextHistory.size() - 1;
         }
     }
 
