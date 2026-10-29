@@ -6,6 +6,7 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="menuFile">
           <Properties>
+            <Property name="mnemonic" type="int" value="68"/>
             <Property name="text" type="java.lang.String" value="Datei"/>
           </Properties>
           <SubComponents>
@@ -196,7 +197,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="jScrollPane1" pref="272" max="32767" attributes="0"/>
-                      <EmptySpace type="related" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="undoPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -220,7 +221,7 @@
                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                       <Component id="btnSpecialChar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="customLogo" pref="164" max="32767" attributes="0"/>
+                      <Component id="customLogo" pref="192" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>

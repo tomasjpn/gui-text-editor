@@ -231,6 +231,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        menuFile.setMnemonic('D');
         menuFile.setText("Datei");
 
         menuFileNew.setText("Neu");
@@ -392,7 +393,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGap(41, 41, 41)
                         .addComponent(btnSpecialChar)
                         .addGap(27, 27, 27)
-                        .addComponent(customLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)))
+                        .addComponent(customLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -526,11 +527,11 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRedo;
     private javax.swing.JButton btnReplace;
     private javax.swing.JButton btnReplaceAll;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSpecialChar;
-    private javax.swing.JButton btnRedo;
     private javax.swing.JButton btnUndo;
     private javax.swing.JFormattedTextField characterInputField;
     private javax.swing.JCheckBox chbCaseSensivity;
@@ -556,18 +557,18 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuFileEnd;
     private javax.swing.JMenuItem menuFileNew;
     private javax.swing.JMenuItem menuFileOpen;
+    private javax.swing.JMenuItem menuFileRedo;
     private javax.swing.JMenuItem menuFileSave;
     private javax.swing.JMenuItem menuFileSaveAs;
-    private javax.swing.JMenuItem menuFileRedo;
     private javax.swing.JMenuItem menuFileUndo;
     private javax.swing.JMenu menuHelp;
     private javax.swing.JMenuItem menuHelpInfo;
     private javax.swing.JPanel positionPanel;
-    private javax.swing.JPanel undoPanel;
     private javax.swing.JTextField replaceInputField;
     private javax.swing.JTextArea responseTextField;
     private javax.swing.JTextField searchInputField;
     private EditorModel textEditorModel;
+    private javax.swing.JPanel undoPanel;
     // End of variables declaration//GEN-END:variables
 
     private void search() {
