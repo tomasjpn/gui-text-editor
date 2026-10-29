@@ -682,8 +682,17 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     private void closeEditor() {
-        if (!textEditorModel.isModified()
-                || InputDialog.showConfirmExitDialog(this) == javax.swing.JOptionPane.YES_OPTION) {
+        if (!textEditorModel.isModified()) {
+            dispose();
+            return;
+        }
+
+        int selection = InputDialog.showConfirmExitDialog(this);
+        if (selection == InputDialog.NEW_SAVE_OPTION) {
+            if (saveCurrentDocument()) {
+                dispose();
+            }
+        } else if (selection == InputDialog.NEW_DISCARD_OPTION) {
             dispose();
         }
     }
