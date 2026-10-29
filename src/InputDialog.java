@@ -44,7 +44,16 @@ public class InputDialog extends JTextArea {
     }
 
     public static int showConfirmExitDialog(Component parent) {
-        return showConfirmation(parent, "Der Text wurde geändert. Möchten Sie den Editor wirklich beenden?", "Editor beenden");
+        return JOptionPane.showOptionDialog(
+                parent,
+                "Der Text wurde geändert. Möchten Sie ihn vor dem Beenden speichern?",
+                "Editor beenden",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                new Object[]{"Speichern", "Verwerfen", "Abbrechen"},
+                "Speichern"
+        );
     }
 
     public static int showConfirmNewDocumentDialog(Component parent) {
